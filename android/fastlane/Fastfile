@@ -1,0 +1,16 @@
+default_platform(:android)
+
+platform :android do
+  desc "Runs all the tests"
+  lane :testDebug do
+    gradle(task: "testDebug")
+  end
+
+  desc "Submit a new Beta Build to Crashlytics Beta"
+  lane :qa do
+    gradle(task: "clean ")
+    gradle(task: "assembleDebug")
+    git()
+    slack()
+  end
+end
